@@ -1,0 +1,16 @@
+/* Subtle animation for the card */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  animation: fadeInUp 0.7s ease-out;
+}

@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Tasks — ToDo App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <script src="https://kit.fontawesome.com/a2d9a0adf3.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white">
+  
+<<<<<<< HEAD
+=======
+  <!-- Header -->
+>>>>>>> 05ac8407ca2129f5a1487438471578959866b638
+  <header class="container mx-auto px-6 py-6 flex items-center justify-between">
+    <h1 class="text-2xl font-bold">📝 {{username}} ToDo List</h1>
+    <a href="{% url 'logout_view' %}" class="bg-white/20 hover:bg-white/30 transition px-4 py-2 rounded-lg text-sm font-medium">🚪 Log out</a>
+  </header>
+
+<<<<<<< HEAD
+=======
+  <!-- Add new task -->
+>>>>>>> 05ac8407ca2129f5a1487438471578959866b638
+  <section class="container mx-auto px-6 mt-8">
+    <form method="POST" action="/todo/create/" class="flex gap-3 justify-center">
+      {% csrf_token %}
+      <input type="text" name="title" placeholder="✍️ Add a new task..."
+             class="w-2/3 rounded-xl bg-white/20 border border-white/30 px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-pink-400">
+      <button type="submit" class="px-5 py-3 bg-gradient-to-r from-pink-500 to-indigo-500 rounded-xl font-semibold shadow-lg hover:opacity-90 transition">
+        ➕ Add
+      </button>
+    </form>
+  </section>
+
+<<<<<<< HEAD
+  <main class="container mx-auto px-6 mt-10">
+
+    <ul class="space-y-4">
+      {% for plan in todos %}
+        <li class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl p-5 flex items-center justify-between hover:bg-white/20 transition">
+
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-white/50">{{ plan.created_time|date:"M d, Y H:i" }}</span>
+            {% if plan.done %}
+              <span class="line-through text-white/60">✅ {{ plan.title }}</span>
+            {% else %}
+              <span class="text-lg font-medium">🕓 {{ plan.title }}</span>
+            {% endif %}
+          </div>
+
+
+          <div class="flex items-center gap-3 text-sm">
+            {% if not plan.done %}
+              <a href="{% url 'is_done' plan.pk %}" class="text-green-400 hover:text-green-300 transition font-semibold">✔ Done</a>
+            {% endif %}
+            <a href="{% url 'todo_delete' plan.pk %}" class="text-red-400 hover:text-red-300 transition font-semibold">🗑 Delete</a>
+          </div>
+        </li>
+      {% empty %}
+        <p class="text-center text-white/70 mt-10">✨ You have no tasks yet. Add something to get started!</p>
+      {% endfor %}
+    </ul>
+
+    <div class="flex justify-center mt-10">
+      <div class="pagination flex items-center gap-2 bg-white/10 p-3 rounded-xl border border-white/20">
+
+          {% if todos.has_previous %}
+              <a href="?page=1" class="px-3 py-1 text-sm rounded-lg hover:bg-white/20 transition">
+                &laquo; First
+              </a>
+              <a href="?page={{ todos.previous_page_number }}" class="px-3 py-1 text-sm rounded-lg hover:bg-white/20 transition">
+                Previous
+              </a>
+          {% endif %}
+
+          <span class="current px-3 py-1 text-sm bg-white/30 rounded-lg font-bold">
+              Page {{ todos.number }} of {{ todos.paginator.num_pages }}
+          </span>
+
+          {% if todos.has_next %}
+              <a href="?page={{ todos.next_page_number }}" class="px-3 py-1 text-sm rounded-lg hover:bg-white/20 transition">
+                Next
+              </a>
+              <a href="?page={{ todos.paginator.num_pages }}" class="px-3 py-1 text-sm rounded-lg hover:bg-white/20 transition">
+                Last &raquo;
+              </a>
+          {% endif %}
+      </div>
+    </div>
+  </main>
+
+=======
+  <!-- Task List -->
+  <main class="container mx-auto px-6 mt-10">
+    {% if plans %}
+      <ul class="space-y-4">
+        {% for plan in plans %}
+          <li class="backdrop-blur-lg bg-white/10 border border-white/20 rounded-2xl p-5 flex items-center justify-between hover:bg-white/20 transition">
+
+            <!-- Left: Task name -->
+            <div class="flex items-center gap-3">
+              {% if plan.done %}
+                <span class="text-xs text-white/50">{{ plan.created_time|date:"M d, Y H:i" }}</span>
+                <span class="line-through text-white/60">✅ {{ plan.title }}</span>
+              {% else %}
+                <span class="text-xs text-white/50">{{ plan.created_time|date:"M d, Y H:i" }}</span>
+                <span class="text-lg font-medium">🕓 {{ plan.title }}</span>
+              {% endif %}
+            </div>
+
+
+            <!-- Right: Actions -->
+            <div class="flex items-center gap-3 text-sm">
+              {% if not plan.done %}
+                <a href="{% url 'is_done' plan.pk %}" class="text-green-400 hover:text-green-300 transition font-semibold">✔ Done</a>
+              {% endif %}
+              <a href="{% url 'todo_delete' plan.pk %}" class="text-red-400 hover:text-red-300 transition font-semibold">🗑 Delete</a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-center text-white/70 mt-10">✨ You have no tasks yet. Add something to get started!</p>
+    {% endif %}
+  </main>
+
+  <!-- Floating shapes -->
+>>>>>>> 05ac8407ca2129f5a1487438471578959866b638
+  <div class="absolute top-20 left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+  <div class="absolute bottom-20 right-10 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
+
+  <footer class="py-8 text-center text-white/70 mt-16">
+    🌸 Keep going,! Small steps every day 💪
+  </footer>
+
+  <script src="{% static 'js/login.js' %}"></script>
+</body>
+<<<<<<< HEAD
+</html>
+=======
+</html>
+>>>>>>> 05ac8407ca2129f5a1487438471578959866b638

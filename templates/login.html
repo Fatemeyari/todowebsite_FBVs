@@ -1,0 +1,65 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | ToDo App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 min-h-screen flex items-center justify-center relative overflow-hidden">
+
+  <!-- Glass card -->
+  <div class="backdrop-blur-lg bg-white/20 border border-white/30 rounded-3xl shadow-2xl p-10 w-full max-w-md text-white">
+    <h2 class="text-4xl font-bold text-center mb-6">Welcome Back 👋</h2>
+    <p class="text-center text-white/80 mb-8">Sign in to your ToDo account</p>
+
+    {% if form.errors %}
+      <div class="bg-red-500/30 text-white px-4 py-2 rounded mb-4 text-center">
+        Invalid username or password.
+      </div>
+    {% endif %}
+
+    <form method="post" class="space-y-5">
+      {% csrf_token %}
+
+      <div>
+        <label for="username" class="block text-white/80 mb-1">Username</label>
+        <input type="text" name="username" id="username"
+               class="w-full rounded-xl bg-white/20 border border-white/30 px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-pink-400"
+               placeholder="Enter your username" required>
+      </div>
+
+      <div>
+        <label for="password" class="block text-white/80 mb-1">Password</label>
+        <input type="password" name="password" id="password"
+               class="w-full rounded-xl bg-white/20 border border-white/30 px-3 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-pink-400"
+               placeholder="••••••••" required>
+      </div>
+
+      <button type="submit"
+              class="w-full py-3 bg-gradient-to-r from-pink-500 to-indigo-500 rounded-xl font-semibold shadow-lg hover:opacity-90 transition duration-300">
+        Sign In
+      </button>
+    </form>
+
+    <div class="text-center mt-6 text-white/80 text-sm">
+      Don’t have an account?
+      <a href="{% url 'create_account' %}" class="text-pink-300 hover:text-white font-semibold">Sign up</a>
+    </div>
+
+    <div class="text-center mt-2">
+      <a href="{% url 'change_password' %}" class="text-xs text-white/60 hover:text-white/90">Forgot password?</a>
+    </div>
+  </div>
+
+  <!-- floating shapes for style -->
+  <div class="absolute top-20 left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+  <div class="absolute bottom-20 right-10 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
+
+  <script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>
