@@ -12,19 +12,15 @@
 
 <body class="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white">
   
-<<<<<<< HEAD
-=======
+
   <!-- Header -->
->>>>>>> 05ac8407ca2129f5a1487438471578959866b638
   <header class="container mx-auto px-6 py-6 flex items-center justify-between">
     <h1 class="text-2xl font-bold">📝 {{username}} ToDo List</h1>
     <a href="{% url 'logout_view' %}" class="bg-white/20 hover:bg-white/30 transition px-4 py-2 rounded-lg text-sm font-medium">🚪 Log out</a>
   </header>
 
-<<<<<<< HEAD
-=======
+
   <!-- Add new task -->
->>>>>>> 05ac8407ca2129f5a1487438471578959866b638
   <section class="container mx-auto px-6 mt-8">
     <form method="POST" action="/todo/create/" class="flex gap-3 justify-center">
       {% csrf_token %}
@@ -36,7 +32,6 @@
     </form>
   </section>
 
-<<<<<<< HEAD
   <main class="container mx-auto px-6 mt-10">
 
     <ul class="space-y-4">
@@ -93,7 +88,7 @@
     </div>
   </main>
 
-=======
+
   <!-- Task List -->
   <main class="container mx-auto px-6 mt-10">
     {% if plans %}
@@ -124,12 +119,10 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p class="text-center text-white/70 mt-10">✨ You have no tasks yet. Add something to get started!</p>
     {% endif %}
   </main>
 
   <!-- Floating shapes -->
->>>>>>> 05ac8407ca2129f5a1487438471578959866b638
   <div class="absolute top-20 left-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
   <div class="absolute bottom-20 right-10 w-60 h-60 bg-white/10 rounded-full blur-3xl"></div>
 
@@ -139,8 +132,4 @@
 
   <script src="{% static 'js/login.js' %}"></script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> 05ac8407ca2129f5a1487438471578959866b638
