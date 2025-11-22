@@ -5,32 +5,27 @@ from django.contrib.auth import get_user_model
 from django.contrib import messages
 
 from .models import User
+from .forms import CreateAccountForm , ChangePasswordForm, LoginForm
+
 
 def home(request):
     """ Render the home page. """
     return render(request, 'home.html')
 
+
+
+
 def create_accounts(request):
     """ Create new accounts. """
     if request.method == 'POST':
-        try:
-            username=request.POST.get('username')
-            password1=request.POST.get('password1')
-            password2=request.POST.get('password2')
-            if password1 != password2:
-                return redirect('.' ,context={'message':'Passwords do not match'})
-            else:
-                password=password1
-            if request.POST.get('email'):
-                email=request.POST.get('email')
-            else:
-                email=None
-            user=User.objects.create_user(username=username, password=password , email=email)
-            user.save()
-            return redirect('todo_list')
-        except:
-            return redirect('.' ,context={'message':'Something went wrong'})
-    return render(request, 'account.html')
+        form = CreateAccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login_view')
+        return redirect('.')
+    else:
+        form = CreateAccountForm()
+    return render(request, 'account.html', {'form': form})
 
 
 
@@ -38,31 +33,31 @@ def create_accounts(request):
 def change_password(request):
     """ Change password. """
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password1 = request.POST.get('password1')
-        password2 = request.POST.get('password2')
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            messages.error(request, "User not found.")
-            return redirect('.')
-        if password1 != password2:
-            messages.error(request, "Passwords do not match.")
-            return redirect('.')
-        user=User.objects.get(username=username)
-        user.password=password1
-        user.set_password(password1)
-        user.save()
-        messages.success(request, "Password changed successfully. Please login again.")
-        return redirect('login_view')
-    return render(request, 'change_password.html')
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data['username']
+            password1=form.cleaned_data['password1']
+            password2=form.cleaned_data['password2']
+            if password1 != password2:
+                return messages.error(request, 'passwords don\'t match')
+            else:
+                user=User.objects.get(username=username)
+                user.set_password(password1)
+                user.save()
+                return redirect('login_view')
+        return redirect('.')
+    else:
+        form = CreateAccountForm()
+    return render(request, 'change_password.html', {'form': form})
 
 
 def login_view(request):
     """ login view.  """
     if request.method == 'POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
+        form=LoginForm(request.POST)
+        if form.is_valid():
+            username=form.cleaned_data['username']
+            password=form.cleaned_data['password']
         user=authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
@@ -83,3 +78,5 @@ def logout_view(request):
     response['Pragma'] = 'no-cache'
     response['Expires'] = '0'
     return response
+
+
