@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from .models import Todo
 from users.models import User
-
+from .forms import CreateTaskForm
 @login_required(login_url='login_view')
 @never_cache
 def todo_list(request):
@@ -36,10 +36,16 @@ def todo_list(request):
 def todo_create(request):
     """ Create a new Todo task for the current user. """
     if request.method=='POST':
-        title=request.POST.get('title')
-        if title:
-            plan=Todo.objects.create(user=request.user,title=title)
-    return redirect('todo_list')
+        form=CreateTaskForm(request.POST)
+        if form.is_valid():
+            title=form.cleaned_data['title']
+            if title:
+                plan=Todo.objects.create(user=request.user,title=title)
+            return redirect('todo_list')
+        return redirect('.')
+    else:
+        form=CreateTaskForm()
+    return render(request, 'todo_list.html', {'form':form})
 
 
 
