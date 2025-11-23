@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,3 +131,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #authentication
 AUTH_USER_MODEL = "users.User"
+
+
+#captcha
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
+}
+
