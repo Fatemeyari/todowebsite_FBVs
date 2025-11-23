@@ -20,6 +20,7 @@ def create_accounts(request):
     if request.method == 'POST':
         form = CreateAccountForm(request.POST)
         if form.is_valid():
+            human = True
             form.save()
             return redirect('login_view')
         return redirect('.')

@@ -1,10 +1,11 @@
 from django import forms
-
+from captcha.fields import CaptchaField
 from .models import User
 
 
 class CreateAccountForm(forms.ModelForm):
     """Form for creating new accounts."""
+    captcha = CaptchaField()
     password1=forms.CharField(widget=forms.PasswordInput)
     password2=forms.CharField(widget=forms.PasswordInput)
     class Meta:

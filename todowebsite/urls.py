@@ -25,5 +25,6 @@ urlpatterns = [
     path('user/', include('users.urls')),
     path('todo/', include('todos.urls')),
     path('',home, name='home'),
+    path('captcha/', include('captcha.urls')),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
