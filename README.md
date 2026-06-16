@@ -5,8 +5,9 @@ This is a simple Todo application built with Django.
 The database structure is shown in the diagram below:
 
 <a href="https://github.com/Fatemeyari/todowebsite_FBVs/blob/main/docks/Todo-Diagram.drawio.png">
-  <img src="docks/Todo-Diagram.drawio.png" alt="Database Diagram" width="800">
+  <img src="docks/Todo-Diagram.drawio.png" alt="Database Diagram" width="900">
 </a>
+
 
 🎨 Frontend
 The frontend UI was designed with assistance from AI tools (ChatGPT) and further customized for better user experience and responsiveness.
