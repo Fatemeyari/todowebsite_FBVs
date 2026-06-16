@@ -4,7 +4,7 @@ This is a simple Todo application built with Django.
 🧠 Database Design
 The database structure is shown in the diagram below:
 <a href="https://github.com/Fatemeyari/todowebsite_FBVs/blob/main/docks/Todo-Diagram.drawio.png">
-  <img src="docks/Todo-Diagram.drawio.png" alt="Database Diagram" width="400">
+  <img src="docks/Todo-Diagram.drawio.png" alt="Database Diagram" width="800">
 </a>
 
 🎨 Frontend
